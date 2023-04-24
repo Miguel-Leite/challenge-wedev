@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,13 @@ Route::prefix('users')->group(function() {
   Route::post('/', [UserController::class, 'create']);
   Route::put('/{id}', [UserController::class, 'update']);
   Route::delete('/{id}', [UserController::class, 'delete']);
+});
+
+
+Route::prefix('merchants')->group(function() {
+  Route::get('/', [MerchantController::class, 'index']);
+  Route::get('/{id}', [MerchantController::class, 'getById']);
+  Route::post('/', [MerchantController::class, 'create']);
+  Route::put('/{id}', [MerchantController::class, 'update']);
+  Route::delete('/{id}', [MerchantController::class, 'delete']);
 });

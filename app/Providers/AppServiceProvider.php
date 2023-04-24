@@ -17,8 +17,18 @@ class AppServiceProvider extends ServiceProvider
       );
 
       $this->app->bind(
+        'App\Repositories\Contracts\MerchantRepositoryInterface',
+        'App\Repositories\MerchantRepository',
+      );
+
+      $this->app->bind(
         'App\Interfaces\UserServiceInterface',
         'App\Services\UserService',
+      );
+
+      $this->app->bind(
+        'App\Interfaces\MerchantServiceInterface',
+        'App\Services\MerchantService',
       );
     }
 

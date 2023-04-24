@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoremerchantRequest;
 use App\Http\Requests\UpdatemerchantRequest;
+use App\Interfaces\MerchantServiceInterface;
 use App\Models\merchant;
 
 class MerchantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+      public MerchantServiceInterface $merchantServiceInterface,
+    ) {}
     public function index()
     {
-        //
+      return response()->json([
+        "data" => $this->merchantServiceInterface->getMerchants()
+      ]);
     }
 
     /**

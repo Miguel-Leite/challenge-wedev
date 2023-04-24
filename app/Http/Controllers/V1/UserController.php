@@ -21,6 +21,10 @@ class UserController extends Controller
     ]);
   }
 
+  public function getById($id) {
+    return response()->json($this->userServiceInterface->getUserById($id));
+  }
+
   public function create(Request $request)
   {
     $user = new UserDTO(

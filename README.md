@@ -17,15 +17,17 @@ composer install
 
 # generating the docker image
 
-./vendor/bin/sail up -d  
-# or
-sudo ./vendor/bin/sail up -d 
+# for ubuntu operating system
+docker composer up -d
 
-# migration
-sudo ./vendor/bin/sail artisan migrate
+# for windows operating system
+docker-composer up -d
 
-# api is running on port -> 8000
-# http://localhost:8000/
+# running the migrations
+php artisan migrate
+
+# api is running on port -> 8081
+# http://localhost:8081/
 
 ```
 
@@ -33,11 +35,11 @@ sudo ./vendor/bin/sail artisan migrate
 
 ### Users
 
-- [ ] `GET /api/users`: Returns all registered users.
-- [ ] `POST /api/users`: Register a new user.
-- [ ] `GET /api/users/{id}`: Returns a specific user.
-- [ ] `PUT /api/users/{id}`: Updates information for an existing user.
-- [ ] `DELETE /api/users/{id}`: Delete a user.
+- [x] `GET /api/users`: Returns all registered users.
+- [x] `POST /api/users`: Register a new user.
+- [x] `GET /api/users/{id}`: Returns a specific user.
+- [x] `PUT /api/users/{id}`: Updates information for an existing user.
+- [x] `DELETE /api/users/{id}`: Delete a user.
 
 ### Products
 

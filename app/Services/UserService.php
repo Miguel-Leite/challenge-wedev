@@ -15,6 +15,10 @@ class UserService implements UserServiceInterface
   public function __construct(
     public UserRepositoryInterface $userRepository,
   ) {}
+
+  public function getUserById(int $id) {
+    return $this->userRepository->find($id);
+  }
   public function getUsers() {
     return $this->userRepository->all();
   }

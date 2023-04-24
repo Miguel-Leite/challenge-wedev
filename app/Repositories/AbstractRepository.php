@@ -14,7 +14,7 @@ abstract class AbstractRepository
 
   public function find(int $id)
   {
-    return $this->model->find($id);
+    return $this->model::find($id);
   }
 
   public function all()

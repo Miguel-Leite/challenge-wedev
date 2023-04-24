@@ -9,6 +9,7 @@ use App\DTO\User\UserDTO;
 interface UserServiceInterface
 {
   public function getUsers();
+  public function getUserById(int $id);
   public function create(UserDTO $userDTO);
   public function update(UserDTO $userDTO, int $id);
   public function delete(int $id);

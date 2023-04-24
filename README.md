@@ -17,11 +17,13 @@ composer install
 
 # generating the docker image
 
-./vendor/bin/sail up -d  
-# or
-sudo ./vendor/bin/sail up -d 
+# for ubuntu operating system
+docker composer up -d
 
-# migration
+# for windows operating system
+docker-composer up -d
+
+# running the migrations
 php artisan migrate
 
 # api is running on port -> 8081

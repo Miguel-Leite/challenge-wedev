@@ -1,56 +1,49 @@
-version: '3'
+version: "3.7"
 services:
-    laravel.test:
-        build:
-            context: ./vendor/laravel/sail/runtimes/8.2
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.2/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
+    nginx:
+        image: nginx:1.17-alpine
+        container_name: wedev-nginx
         ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            - "${APP_PORT}-:80"
         volumes:
-            - '.:/var/www/html'
+            - ./:/var/www/html
+            - .docker/nginx:/etc/nginx/conf.d
         networks:
-            - sail
+            wedev:
+                aliases:
+                    - wedev.local
         depends_on:
-            - pgsql
-    pgsql:
-        image: 'postgres:15'
-        ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
-        environment:
-            PGPASSWORD: '${DB_PASSWORD:-secret}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-        volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+            - app
+
+    app:
+        build:
+            context: .docker
+            dockerfile: Dockerfile
+        container_name: wedev-app
         networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - pg_isready
-                - '-q'
-                - '-d'
-                - '${DB_DATABASE}'
-                - '-U'
-                - '${DB_USERNAME}'
-            retries: 3
-            timeout: 5s
-networks:
-    sail:
-        driver: bridge
+            wedev:
+        image: wedev
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        volumes:
+            - ./:/var/www/html
+            - .docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/.docker-php-ext-xdebug.ini
+            - .docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+            - .docker/php/conf.d/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
+
+    db:
+        image: postgres
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_DATABASE}
+        ports:
+            - "5432:5432"
+        volumes:
+            - db-data:/var/lib/postgresql/data
+
 volumes:
-    sail-pgsql:
-        driver: local
+    db-data:
+
+networks:
+    wedev:

@@ -25,11 +25,11 @@ class UserControllerTest extends TestCase
 
   public function test_create_(): void
   {
-    
+
     $data = [
       'name'=> 'Miguel',
       'email'=> 'miguel.leite@gmail.com',
-      'status'=> true,
+      'is_admin'=> true,
       'password'=> '1234',
     ];
 

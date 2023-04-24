@@ -8,15 +8,13 @@ use Illuminate\Contracts\Validation\Validator;
 
 class UserDTO extends AbstractDTO implements DTOInterface
 {
-  public readonly bool $is_admin;
 
   public function __construct(
     public readonly string $name,
     public readonly string $email,
     public readonly string $password,
-    public readonly ?bool $status = false,
+    public readonly ?bool $is_admin = false,
   ) {
-    $this->is_admin = $status;
     $this->validate();
   }
 

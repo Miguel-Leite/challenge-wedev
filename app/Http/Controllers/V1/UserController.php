@@ -11,26 +11,48 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-  public function __construct() {}
+  public function __construct(
+    public UserServiceInterface $userServiceInterface
+  ) {}
 
-  public function index(UserServiceInterface $userServiceInterface) {
+  public function index() {
     return response()->json([
-      'data' => $userServiceInterface->getUsers(),
+      'data' => $this->userServiceInterface->getUsers(),
     ]);
   }
+
   public function create(Request $request)
   {
-    $dto = new UserDTO(
+    $user = new UserDTO(
       ...$request->only([
         "email",
         "name",
-        "status",
+        "is_admin",
         "password",
       ]),
     );
 
-    return response()->json([
-      $dto->toArray()
-    ]);
+    $response = $this->userServiceInterface->create($user);
+    return response()->json($response);
+  }
+
+  public function update(Request $request, int $id)
+  {
+    $user = new UserDTO(
+      ...$request->only([
+        "email",
+        "name",
+        "is_admin",
+        "password",
+      ]),
+    );
+
+    $response = $this->userServiceInterface->update($user, $id);
+    return response()->json($user->all());
+  }
+
+  public function delete(int $id) {
+    $response = $this->userServiceInterface->delete($id);
+    return response()->json($response);
   }
 }

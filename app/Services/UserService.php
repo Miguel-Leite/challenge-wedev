@@ -20,6 +20,24 @@ class UserService implements UserServiceInterface
   }
 
   public function create(UserDTO $userDTO) {
-    $this->userRepository->store($userDTO->toArray());
+    return $this->userRepository->store($userDTO->toArray());
+  }
+
+  public function update(UserDTO $userDTO, int $id) {
+    $userExists = $this->userRepository->find($id);
+
+    if (!$userExists) {
+      return "User not found!";
+    }
+    $this->userRepository->save($id, $userDTO->all());
+  }
+
+  public function delete($id) {
+    $userExists = $this->userRepository->find($id);
+
+    if (!$userExists) {
+      return "User not found!";
+    }
+    return $this->userRepository->destroy($id);
   }
 }

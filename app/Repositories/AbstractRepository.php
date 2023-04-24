@@ -26,8 +26,12 @@ abstract class AbstractRepository
     return $this->model->create($data);
   }
 
-  public function save(array $data){
-    return $this->model->update($data);
+  public function save(int $id, array $data){
+    return $this->model::where('id',$id)->update($data);
+  }
+
+  public function destroy(int $id){
+    return $this->model::where('id',$id)->delete();
   }
 
   protected function resolveModel() {

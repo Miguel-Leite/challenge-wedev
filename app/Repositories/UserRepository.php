@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -11,5 +11,4 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 {
 
   protected $model = User::class;
-
 }

@@ -6,5 +6,8 @@ namespace App\Repositories\Contracts;
 
 interface UserRepositoryInterface
 {
+  public function find(int $id);
   public function all();
+  public function store(array $data);
+  public function save(array $data);
 }

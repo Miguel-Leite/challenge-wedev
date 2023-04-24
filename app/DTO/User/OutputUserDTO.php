@@ -1,16 +1,18 @@
 <?php
 
-namespace App\DTO\user;
+namespace App\DTO\User;
 use App\DTO\AbstractDTO;
-use App\DTO\InterfaceDTO;
+use App\Interfaces\DTOInterface;
 use Illuminate\Contracts\Validation\Validator;
 
-class OutputUser extends AbstractDTO implements InterfaceDTO
+class OutputUserDTO extends AbstractDTO implements DTOInterface
 {
   public function __construct(
     public string $name,
     public string $email,
     public bool $is_admin,
+    public readonly \DateTime $created_at,
+    public readonly \DateTime $updated_at,
   ) {
     $this->validate();
   }

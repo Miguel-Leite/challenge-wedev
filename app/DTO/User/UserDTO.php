@@ -1,12 +1,12 @@
 <?php
 
-namespace App\DTO\user;
+namespace App\DTO\User;
 
 use App\DTO\AbstractDTO;
-use App\DTO\InterfaceDTO;
+use App\Interfaces\DTOInterface;
 use Illuminate\Contracts\Validation\Validator;
 
-class UserDTO extends AbstractDTO implements InterfaceDTO
+class UserDTO extends AbstractDTO implements DTOInterface
 {
   public readonly bool $is_admin;
 

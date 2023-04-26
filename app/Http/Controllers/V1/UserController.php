@@ -16,9 +16,7 @@ class UserController extends Controller
   ) {}
 
   public function index() {
-    return response()->json([
-      'data' => $this->userServiceInterface->getUsers(),
-    ]);
+    return response()->json($this->userServiceInterface->getUsers());
   }
 
   public function getById($id) {

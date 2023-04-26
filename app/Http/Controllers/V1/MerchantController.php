@@ -33,6 +33,23 @@ class MerchantController extends Controller
       ]),
     );
     $response = $this->merchantServiceInterface->create($merchant);
-    return response()->json($response);
+    return response()->json($response,201);
+  }
+  public function update(Request $request, int $id)
+  {
+    $merchant = new MerchantDTO(
+      ...$request->only([
+        "name",
+        "email",
+        "password",
+      ]),
+    );
+    $response = $this->merchantServiceInterface->update($merchant, $id);
+    return response()->json($response,201);
+  }
+
+  public function delete (int $id)
+  {
+    return response()->json($this->merchantServiceInterface->delete($id));
   }
 }

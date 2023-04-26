@@ -10,11 +10,10 @@ class Merchant extends Model
   use HasFactory;
 
   protected $fillable = [
-    'name',
+    'merchant_name',
     'is_admin',
-    'email',
-    'password',
   ];
+  
 
   public function user() {
     return $this->belongsTo(User::class);

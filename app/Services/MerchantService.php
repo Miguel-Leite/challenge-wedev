@@ -31,7 +31,7 @@ class MerchantService implements MerchantServiceInterface
     if (!$userExists) {
       return "Merchant not found!";
     }
-    $this->merchantRepository->save($id, $merchantDTO->all());
+    return $this->merchantRepository->update($id, $merchantDTO->all());
   }
 
   public function delete($id) {
@@ -40,6 +40,6 @@ class MerchantService implements MerchantServiceInterface
     if (!$merchantExists) {
       return "Merchant not found!";
     }
-    return $this->merchantRepository->destroy($id);
+    return $this->merchantRepository->delete($id);
   }
 }

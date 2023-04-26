@@ -5,7 +5,6 @@ namespace App\Http\Controllers\V1;
 use App\DTO\User\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Interfaces\UserServiceInterface;
-use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

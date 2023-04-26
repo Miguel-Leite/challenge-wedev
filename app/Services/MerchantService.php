@@ -21,17 +21,22 @@ class MerchantService implements MerchantServiceInterface
     return $this->merchantRepository->all();
   }
 
-  public function create(MerchantDTO $userDTO) {
-    return $this->merchantRepository->create($userDTO->toArray());
+  public function create(MerchantDTO $merchantDTO) {
+    $data = $merchantDTO->toArray();
+    $data['password'] = bcrypt($data['password']);
+    return $this->merchantRepository->create($data);
   }
 
   public function update(MerchantDTO $merchantDTO, int $id) {
+    $data = $merchantDTO->toArray();
+    $data['password'] = bcrypt($data['password']);
+
     $userExists = $this->merchantRepository->find($id);
 
     if (!$userExists) {
       return "Merchant not found!";
     }
-    return $this->merchantRepository->update($id, $merchantDTO->all());
+    return $this->merchantRepository->update($id, $data);
   }
 
   public function delete($id) {

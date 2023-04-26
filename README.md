@@ -18,7 +18,7 @@ composer install
 # generating the docker image
 
 # for ubuntu operating system
-docker composer up -d
+sudo docker composer up -d
 
 # for windows operating system
 docker-composer up -d
@@ -35,27 +35,41 @@ php artisan migrate
 
 ### Users
 
+- [x] `GET /api/me`: returns the logged in user information
+- [x] `POST /api/login`: Authentication
+- [x] `GET /api/Logout`: Session termination
+### Users
+
 - [x] `GET /api/users`: Returns all registered users.
 - [x] `POST /api/users`: Register a new user.
 - [x] `GET /api/users/{id}`: Returns a specific user.
 - [x] `PUT /api/users/{id}`: Updates information for an existing user.
 - [x] `DELETE /api/users/{id}`: Delete a user.
 
+### Merchants
+
+- [x] `GET /api/merchants`: Returns all registered requests.
+- [x] `POST /api/merchants`: Register a new merchant.
+- [x] `GET /api/merchants/{id}`: Returns a specific order.
+- [x] `PUT /api/merchants/{id}`: Updates information for an existing order.
+- [x] `DELETE /api/merchants/{id}`: Delete an merchant.
+
+
 ### Products
 
-- [ ] `GET /api/products`: Returns all registered products.
-- [ ] `POST /api/products`: Register a new product.
-- [ ] `GET /api/products/{id}`: Returns a specific product.
-- [ ] `/api/products/{id}`: Updates information for an existing product.
-- [ ] `DELETE /api/products/{id}`: Delete a product.
+- [x] `GET /api/products`: Returns all registered products.
+- [x] `POST /api/products`: Register a new product.
+- [x] `GET /api/products/{id}`: Returns a specific product.
+- [x] `/api/products/{id}`: Updates information for an existing product.
+- [x] `DELETE /api/products/{id}`: Delete a product.
 
 ### Orders
 
-- [ ] `GET /api/orders`: Returns all registered requests.
-- [ ] `POST /api/orders`: Register a new order.
-- [ ] `GET /api/orders/{id}`: Returns a specific order.
-- [ ] `PUT /api/orders/{id}`: Updates information for an existing order.
-- [ ] `DELETE /api/orders/{id}`: Delete an order.
+- [x] `GET /api/orders`: Returns all registered requests.
+- [x] `POST /api/orders`: Register a new order.
+- [x] `GET /api/orders/{id}`: Returns a specific order.
+- [x] `PUT /api/orders/{id}`: Updates information for an existing order.
+- [x] `DELETE /api/orders/{id}`: Delete an order.
 
 # Tests
 

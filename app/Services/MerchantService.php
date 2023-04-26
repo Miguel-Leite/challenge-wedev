@@ -22,7 +22,7 @@ class MerchantService implements MerchantServiceInterface
   }
 
   public function create(MerchantDTO $userDTO) {
-    return $this->merchantRepository->store($userDTO->toArray());
+    return $this->merchantRepository->create($userDTO->toArray());
   }
 
   public function update(MerchantDTO $merchantDTO, int $id) {

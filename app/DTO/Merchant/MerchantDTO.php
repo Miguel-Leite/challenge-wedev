@@ -12,7 +12,6 @@ class MerchantDTO extends AbstractDTO implements DTOInterface
 {
   public readonly string $merchant_name;
   public function __construct(
-    public readonly ?int $id = null,
     public readonly string $name,
     public readonly string $email,
     public readonly string $password,

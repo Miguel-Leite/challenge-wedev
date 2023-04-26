@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merchant extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $fillable = [
+    'name',
+    'is_admin',
+    'email',
+    'password',
+  ];
+
+  public function user() {
+    return $this->belongsTo(User::class);
+  }
 }

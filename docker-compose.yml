@@ -1,49 +1,16 @@
-version: "3.7"
+version: '3'
+
 services:
-    nginx:
-        image: nginx:1.17-alpine
-        container_name: wedev-nginx
-        ports:
-            - "${APP_PORT}:80"
-        volumes:
-            - ./:/var/www/html
-            - .docker/nginx:/etc/nginx/conf.d
-        networks:
-            wedev:
-                aliases:
-                    - wedev.local
-        depends_on:
-            - app
-
-    app:
-        build:
-            context: .docker
-            dockerfile: Dockerfile
-        container_name: wedev-app
-        networks:
-            wedev:
-        image: wedev
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        volumes:
-            - ./:/var/www/html
-            - .docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/.docker-php-ext-xdebug.ini
-            - .docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-            - .docker/php/conf.d/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
-
-    db:
-        image: postgres
-        environment:
-            POSTGRES_USER: ${DB_USERNAME}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_DATABASE}
-        ports:
-            - "5432:5432"
-        volumes:
-            - db-data:/var/lib/postgresql/data
-
+  database:
+    image: 'bitnami/postgresql'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=wedev
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
 volumes:
-    db-data:
-
-networks:
-    wedev:
+  postgresql_data:
+    driver: local

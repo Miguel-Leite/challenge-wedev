@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
-            $table->enum('status',["out_of_stock","in_stock","running_low"]);
+            $table->enum('status',["processing","processed"])->default("processing");
             $table->timestamps();
         });
     }
